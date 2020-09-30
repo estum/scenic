@@ -7,6 +7,10 @@ module Scenic
       record(:create_view, args)
     end
 
+    def create_temporary_view(*args)
+      record(:create_temporary_view, args)
+    end
+
     def drop_view(*args)
       record(:drop_view, args)
     end
@@ -22,6 +26,9 @@ module Scenic
     def invert_create_view(args)
       drop_view_args = StatementArguments.new(args).remove_version.to_a
       [:drop_view, drop_view_args]
+    end
+
+    def invert_create_temporary_view(args)
     end
 
     def invert_drop_view(args)

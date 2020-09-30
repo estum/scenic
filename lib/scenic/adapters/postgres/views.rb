@@ -52,6 +52,7 @@ module Scenic
             name: namespaced_viewname,
             definition: result["definition"].strip,
             materialized: result["kind"] == "m",
+            temporary: false
           )
         end
 

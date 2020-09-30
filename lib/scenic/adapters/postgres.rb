@@ -61,6 +61,18 @@ module Scenic
         execute "CREATE VIEW #{quote_table_name(name)} AS #{sql_definition};"
       end
 
+      # Creates a temporary view in the database.
+      #
+      # This is typically called in a migration via {Statements#create_temporary_view}.
+      #
+      # @param name The name of the view to create
+      # @param sql_definition The SQL schema for the view.
+      #
+      # @return [void]
+      def create_temporary_view(name, sql_definition)
+        execute "CREATE TEMP VIEW #{quote_table_name(name)} AS #{sql_definition};"
+      end
+
       # Updates a view in the database.
       #
       # This results in a {#drop_view} followed by a {#create_view}. The

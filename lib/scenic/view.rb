@@ -22,26 +22,34 @@ module Scenic
     # @return [Boolean]
     attr_reader :materialized
 
+    # True if the view is temporary
+    # @return [Boolean]
+    attr_reader :temporary
+
     # Returns a new instance of View.
     #
     # @param name [String] The name of the view.
     # @param definition [String] The SQL for the query that defines the view.
     # @param materialized [String] `true` if the view is materialized.
-    def initialize(name:, definition:, materialized:)
+    def initialize(name:, definition:, materialized:, temporary:)
       @name = name
       @definition = definition
       @materialized = materialized
+      @temporary = temporary
     end
 
     # @api private
     def ==(other)
       name == other.name &&
         definition == other.definition &&
-        materialized == other.materialized
+        materialized == other.materialized &&
+        temporary == other.temporary
     end
 
     # @api private
     def to_schema
+      return "" if temporary
+
       materialized_option = materialized ? "materialized: true, " : ""
 
       <<-DEFINITION
