@@ -115,7 +115,7 @@ module Scenic
       #
       # @return [void]
       def drop_view(name)
-        execute "DROP VIEW #{quote_table_name(name)};"
+        execute "DROP VIEW IF EXISTS #{quote_table_name(name)};"
       end
 
       # Creates a materialized view in the database
